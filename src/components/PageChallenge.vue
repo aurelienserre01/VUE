@@ -11,11 +11,18 @@ export default defineComponent({
   data() {
     return {
       firstname: "Jean",
-      age: 30
+      age: 30,
+      annee: 2022
+    }
+  },
+  methods: {
+    setAge(){
+      this.age ++
+      this.annee ++
     }
   },
   mounted(){
-    setInterval(age += 3, 3000)
+    setInterval(this.setAge, 3000)
   }
 })
 </script>
@@ -25,7 +32,7 @@ export default defineComponent({
     <p>Bonjour je m'appelle {{ firstname }}</p>
   </div>
   <div id="age">
-    <p>En 2022, {{ firstname }} aura 23 ans</p>
+    <p>En {{ annee }}, {{ firstname }} aura {{ age }} ans</p>
   </div>
 </template>
 
