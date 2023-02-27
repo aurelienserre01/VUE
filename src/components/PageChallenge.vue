@@ -118,7 +118,6 @@ export default defineComponent({
         "pk.eyJ1IjoiYXVyZWxpZW4wMSIsImEiOiJjbGU3Mm11Z3EwMWVzM3BuNzNnMGpvMTQzIn0.oGvJ6_6fexbc1gVZSF6KXA",
     }).addEventListener("retrieve", (event) => {
       const featureCollection = event.detail;
-      console.log(featureCollection.features[0].geometry.coordinates[0]);
       this.longitudeLatitudeEdit = {
         lng: featureCollection.features[0].geometry.coordinates[0],
         lat: featureCollection.features[0].geometry.coordinates[1],
@@ -130,7 +129,7 @@ export default defineComponent({
       accessToken:
         "pk.eyJ1IjoiYXVyZWxpZW4wMSIsImEiOiJjbGU3Mm11Z3EwMWVzM3BuNzNnMGpvMTQzIn0.oGvJ6_6fexbc1gVZSF6KXA",
       container: "mapContainer",
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/mapbox/dark-v11",
       center: [103.811279, 1.345399],
       zoom: 1,
     });
@@ -140,29 +139,46 @@ export default defineComponent({
 
 <template>
   <div class="center-black">
-    <form action="">
-      <input v-model="firstnameEdit" placeholder="firstname" />
-      <input v-model="lastnameEdit" placeholder="lastname" />
-      <input
-        type="number"
-        required
-        min="10"
-        v-model="ageEdit"
-        placeholder="age"
-      />
-      <input
-        v-model="addressEdit"
-        id="addressInput"
-        type="text"
-        autocomplete="address-line1"
-      />
-      <input
-        type="tel"
-        pattern="[0-9]{10}"
-        v-model="phoneNumberEdit"
-        required
-        placeholder="phone number"
-      />
+    <form>
+      <div class="mb-6">
+        <label for="firstname" class="form-label">Firstname</label>
+        <input id="firstname" class="form-control" v-model="firstnameEdit" />
+      </div>
+      <div class="mb-6">
+        <label for="lastname" class="form-label">Lastname</label>
+        <input id="lastname" class="form-control" v-model="lastnameEdit" />
+      </div>
+      <div class="mb-6">
+        <label for="age" class="form-label">Firstname</label>
+        <input
+          type="number"
+          required
+          min="10"
+          id="age"
+          class="form-control"
+          v-model="ageEdit"
+        />
+      </div>
+      <div class="mb-6">
+        <label for="addressInput" class="form-label">Address</label>
+        <input
+          id="addressInput"
+          class="form-control"
+          v-model="addressEdit"
+          autocomplete="address-line1"
+        />
+      </div>
+      <div class="mb-6">
+        <label for="phonenumber" class="form-label">Phone</label>
+        <input
+          id="phonenumber"
+          class="form-control"
+          v-model="phoneNumberEdit"
+        />
+      </div>
+      <button @click="addMember" type="submit" class="btn btn-primary">
+        Add member
+      </button>
     </form>
     <div id="mapContainer" style="width: 100%; height: 300px"></div>
     <div id="presentation">
@@ -185,7 +201,6 @@ export default defineComponent({
       {{ member.address }} - {{ member.phoneNumber }}
       <button id="delete" @click="deleteMember(member)">Suppr.</button>
     </div>
-    <button @click="addMember" id="add-family-member">Add member</button>
   </div>
 </template>
 
